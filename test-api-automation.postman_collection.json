@@ -20,10 +20,20 @@
 							"// Extrai o valor da chave \"access\" da resposta JSON\r",
 							"var access_token = pm.response.json().access;\r",
 							"\r",
-							"pm.test(\"Check access token arent empty\", function() {\r",
+							"pm.test(\"Check auth token contract\", function() {\r",
 							"    var responseBody = pm.response.json()\r",
+							"        // Logando o responseBody no console do Postman\r",
+							"    console.log(\"Response Body:\", responseBody);\r",
 							"    pm.expect(responseBody.access).to.be.a('string')\r",
+							"    pm.expect(responseBody.refresh).to.be.a('string')\r",
 							"})\r",
+							"\r",
+							"pm.test(\"Check refresh and access is not empty\", function() {\r",
+							"    var responseBody = pm.response.json()\r",
+							"    pm.expect(responseBody.access).is.not.empty\r",
+							"    pm.expect(responseBody.refresh).is.not.empty\r",
+							"})\r",
+							"\r",
 							"\r",
 							"// Define a variável de ambiente \"token\" com o valor extraído\r",
 							"pm.environment.set(\"access_token\", access_token);\r",
@@ -66,6 +76,40 @@
 		},
 		{
 			"name": "/my/crocodiles",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check if status code is 200\", function() {\r",
+							"    pm.response.to.have.status(200)\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Check crocodile contract\", function() {\r",
+							"    var responseBody = pm.response.json()\r",
+							"            // Logando o responseBody no console do Postman\r",
+							"    console.log(\"Response Body:\", responseBody);\r",
+							"    pm.expect(responseBody[0].id).to.be.a('number')\r",
+							"    pm.expect(responseBody[0].name).to.be.a('string')\r",
+							"    pm.expect(responseBody[0].sex).to.be.a('string')\r",
+							"    pm.expect(responseBody[0].date_of_birth).to.be.a('string')\r",
+							"    pm.expect(responseBody[0].age).to.be.a('number')\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Check first crocodile data\", function() {\r",
+							"    var responseBody = pm.response.json()\r",
+							"    pm.expect(responseBody[0].id).equal(12497505)\r",
+							"    pm.expect(responseBody[0].name).equal('croc')\r",
+							"    pm.expect(responseBody[0].sex).equal('M')\r",
+							"    pm.expect(responseBody[0].date_of_birth).equal('1990-01-12')\r",
+							"    pm.expect(responseBody[0].age).equal(34)\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [
