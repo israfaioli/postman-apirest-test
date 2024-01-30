@@ -1,0 +1,11 @@
+stages:
+  - CICD APIREST
+
+testes-api:
+  stage: APIREST tests
+  script:
+    - apt-get update -qy
+    - apt-get install -y nodejs
+    - apt-get install -y npm
+    - npm install -g newman
+    - newman run "test-api-automation.postman_collection.json"
