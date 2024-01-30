@@ -1,0 +1,25 @@
+name: Testes de API no Postman
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  testes-api:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v2
+
+      - name: Configurar o ambiente Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+
+      - name: Instalar dependências
+        run: npm install -g newman
+
+      - name: Rodar testes Postman
+        run: newman run test-api automation.postman_collection.json--environment test-api-automation.postman_environment.json
