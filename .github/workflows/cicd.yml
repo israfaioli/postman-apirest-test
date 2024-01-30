@@ -16,7 +16,7 @@ jobs:
       - name: Configurar o ambiente Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '14'
+          node-version: '16'
 
       - name: Instalar dependências
         run: npm install -g newman
