@@ -1,11 +1,23 @@
 stages:
-  - CICD APIREST
+  - CICD_APIREST
 
-testes-api:
-  stage: APIREST tests
+Atualizar_arquivos:
+  stage: update maquina
   script:
     - apt-get update -qy
+
+Instalar_node_e_npm:
+  stage: instalando node e mpm
+  script:
     - apt-get install -y nodejs
     - apt-get install -y npm
+
+Instalar_newman_postman:
+  stage: instalando o newman postman
+  script:
     - npm install -g newman
+
+APIREST_tests:
+  stage: realizando os testes integracao
+  script:
     - newman run "test-api-automation.postman_collection.json"
