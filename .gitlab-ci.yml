@@ -1,16 +1,11 @@
 stages:
-  - instalacao-das-dependencias
-  - Testes
+  - CICD
 
-instalacao-das-dependencias:
-  stage: instalacao-das-dependencias
+testes-api:
+  stage: CICD
   script:
     - apt-get update -qy
     - apt-get install -y nodejs
     - apt-get install -y npm
     - npm install -g newman
-
-testes-api:
-  stage: Testes
-  script:
     - newman run "test-api-automation.postman_collection.json"
