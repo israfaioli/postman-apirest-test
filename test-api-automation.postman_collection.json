@@ -14,7 +14,7 @@
 					"script": {
 						"exec": [
 							"pm.test(\"Check if status code is 200\", function() {\r",
-							"    pm.response.to.have.status(200)\r",
+							"    pm.response.to.have.status(201)\r",
 							"})\r",
 							"\r",
 							"// Extrai o valor da chave \"access\" da resposta JSON\r",
